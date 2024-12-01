@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Smart Prediction</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/logo-login.png')}}" rel="icon">
+  <link href="{{ url_for('static', filename='img/logo-login.png')}}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/quill/quill.snow.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/simple-datatables/style.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+  <script>
+    function printData() {
+    // Menggunakan AJAX untuk mendapatkan data anggota terbaru
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/print_anggota", true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = JSON.parse(xhr.responseText);
+
+            // Menentukan pesan berdasarkan prediksi
+            var message = "";
+            if (data.prediction == "Berat Kurang") {
+                message = "Lakukan latihan 4-5 hari per minggu dengan fokus pada latihan kekuatan dan kardio ringan. Untuk latihan kekuatan, bagi sesi menjadi upper body dan lower body. Pada hari upper body, lakukan latihan seperti bench press, bent over row, dumbbell shoulder press, bicep curls, dan tricep dips. Pada hari lower body, lakukan squats, deadlifts, leg press, lunges, dan calf raises. Sisihkan satu atau dua hari untuk kardio ringan seperti jalan cepat atau bersepeda, serta stretching dan yoga untuk pemulihan. Akhiri minggu dengan aktivitas fisik menyenangkan seperti hiking atau berenang, dan pastikan ada hari istirahat untuk recovery yang mencakup stretching dan foam rolling.";
+            } else if (data.prediction == "Obesitas") {
+                message = "Ketika sampai pada makan malam, prioritaskan minum air putih sebagai minuman utama untuk menjaga hidrasi. Teh herbal tanpa kafein bisa menjadi pilihan yang baik sebagai minuman penutup yang menenangkan sebelum tidur. Hindari minuman beralkohol atau minuman berenergi yang dapat mengganggu kualitas tidur dan memberikan kalori tambahan yang tidak diperlukan.";
+            } else if (data.prediction == "Berat Normal") {
+                message = "Rutinitas gym yang terencana dengan baik adalah kunci kesuksesan dalam mencapai tujuan kebugaran. Mulai dari hari Senin yang didedikasikan untuk latihan kekuatan dan membangun otot bagian atas dengan latihan seperti bench press, pull-ups, shoulder press, dan barbel curl. Selasa, fokusnya beralih pada kardio dan latihan otot bagian bawah melalui squat, deadlift, lunges, dan leg press. Rabu dijadwalkan sebagai hari istirahat atau pemulihan dengan yoga ringan untuk merilekskan otot-otot. Kemudian, Kamis kembali menantang otot bagian atas dengan latihan seperti lat pull-down, dumbbell bench press, dumbbell row, dan tricep dips. Jumat, intensitas meningkat kembali dengan latihan kardio intensif, seperti high-intensity interval training (HIIT), diikuti dengan latihan beban ringan untuk menjaga kebugaran. Akhir pekan digunakan untuk latihan keseimbangan dan fleksibilitas seperti yoga atau pilates, atau aktivitas luar ruangan seperti hiking, memberi tubuh kesempatan untuk pulih dan mempersiapkan diri untuk minggu berikutnya. Hal terpenting adalah mendengarkan tubuh dan melakukan penyesuaian sesuai kebutuhan serta menjaga konsistensi dalam menjalankan jadwal latihan.";
+            } else if (data.prediction == "Kelebihan Berat") {
+                message = "Setiap hari latihan memiliki fokus yang berbeda untuk membantu membangun kekuatan, meningkatkan kardio, dan mendukung penurunan berat badan. Mulai dari latihan kekuatan bagian atas pada hari Senin, dengan latihan seperti bench press dan lat pull-down, hingga latihan kardio intensif pada hari Selasa dengan high-intensity interval training (HIIT), setiap sesi latihan dirancang untuk mencapai tujuan kebugaran Anda. Hari Rabu ditetapkan sebagai hari istirahat atau pemulihan dengan aktivitas ringan seperti yoga atau berjalan santai, sementara hari Kamis kembali menantang dengan latihan kekuatan bagian bawah seperti squat dan deadlift. Pada hari Jumat, Anda akan mencampur latihan kekuatan dan kardio dengan circuit training untuk memaksimalkan pembakaran kalori dan memperkuat otot-otot tubuh secara keseluruhan. Akhir pekan merupakan kesempatan untuk menjalani aktivitas yang menyenangkan seperti berenang atau hiking, yang juga membantu dalam proses penurunan berat badan. Penting untuk mengikuti jadwal latihan dengan konsisten dan mendengarkan tubuh Anda, serta berkonsultasi dengan profesional kesehatan jika diperlukan untuk memastikan program latihan yang aman dan efektif bagi kondisi tubuh Anda.";
+            }
+
+            // Membuat konten tabel yang akan dicetak
+            var printContent = `
+                <html>
+                <head>
+                    <title>Print Data Anggota</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                        }
+                        .header {
+                            text-align: center;
+                            margin-bottom: 20px;
+                        }
+                        .header h1 {
+                            margin: 0;
+                        }
+                        .line {
+                            border-bottom: 2px solid black;
+                            margin-bottom: 20px;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        th, td {
+                            border: 1px solid black;
+                            padding: 8px;
+                            text-align: left;
+                        }
+                        th {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>Data Anggota</h1>
+                        <div class="line"></div>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Nama</th>
+                            <td>${data.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Jenis Kelamin</th>
+                            <td>${data.gender}</td>
+                        </tr>
+                        <tr>
+                            <th>Umur</th>
+                            <td>${data.age}</td>
+                        </tr>
+                        <tr>
+                            <th>Tinggi Badan</th>
+                            <td>${data.height}</td>
+                        </tr>
+                        <tr>
+                            <th>Berat Badan</th>
+                            <td>${data.weight}</td>
+                        </tr>
+                        <tr>
+                            <th>Waktu</th>
+                            <td>${data.timestamp}</td>
+                        </tr>
+                        <tr>
+                            <th>Prediksi</th>
+                            <td>${data.prediction}</td>
+                        </tr>
+                        <tr>
+                            <th>Pesan</th>
+                            <td>${message}</td>
+                        </tr>
+                    </table>
+                </body>
+                </html>
+            `;
+
+            // Mencetak konten tabel
+            var printWindow = window.open('', '_blank');
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        }
+    };
+    xhr.send();
+}
+
+  </script>
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="{{ url_for('static', filename='img/logo-login.png')}}" alt="">
+        <span class="d-none d-lg-block">Muscle Gym</span>
+      </a>
+
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+
+    </div><!-- End Logo -->
+
+    <!-- End Search Bar -->
+
+    <!-- End Search Icon-->
+
+    <!-- End Notification Icon -->
+
+    <!-- End Messages Dropdown Items -->
+
+    <!-- End Messages Nav -->
+
+    <!-- End Profile Nav -->
+
+    <!-- End Icons Navigation -->
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('dashboard_anggota') }}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('hitung_anggota_form') }}">
+          <i class="bi bi-speedometer"></i><span>Smart Prediction</span>
+        </a>
+      </li>
+      
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('edit_user') }}">
+          <i class="bi bi-clock-history"></i><span>Edit Profile</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('logout') }}">
+          <i class="bi bi-box-arrow-left"></i><span>Logout</span>
+        </a>
+      </li>
+      
+      <!-- End Components Nav -->
+
+      <!-- End Forms Nav -->
+
+      <!-- End Tables Nav -->
+
+      <!-- End Charts Nav -->
+
+      <!-- End Icons Nav -->
+
+      
+
+      <!-- End Profile Page Nav -->
+
+      <!-- End F.A.Q Page Nav -->
+
+      <!-- End Contact Page Nav -->
+
+      <!-- End Register Page Nav -->
+
+      <!-- End Login Page Nav -->
+
+      <!-- End Error 404 Page Nav -->
+
+      <!-- End Blank Page Nav -->
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Smart Prediction</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ url_for('hitung_anggota') }}">Prediction</a></li>
+          <li class="breadcrumb-item active">Result</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+        <div class="row">
+
+            <!-- Sales Card -->
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"></h5>
+    
+                  <!-- Multi Columns Form -->
+                  <form class="row g-3" method="POST" action="{{ url_for('hitung_anggota') }}">
+                    <div class="col-md-6">
+                      <label for="inputName5" class="form-label">Your Name</label>
+                      <input type="text" class="form-control" id="Name" name="Name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputState" class="form-label">Jenis Kelamin</label>
+                        <select id="Gender" name="Gender" class="form-select">
+                          <option selected value="Laki - Laki">Laki - Laki</option>
+                          <option value="Perempuan">Perempuan</option>
+                        </select>
+                      </div>
+                    <div class="col-md-4">
+                      <label for="inputEmail5" class="form-label">Umur</label>
+                      <input type="number" class="form-control" id="Age" name="Age" required>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputPassword5" class="form-label">Tinggi Badan</label>
+                      <input type="number" class="form-control" id="Height" name="Height" required>
+                    </div>
+                    <div class="col-4">
+                      <label for="inputAddress5" class="form-label">Berat Badan</label>
+                      <input type="number" class="form-control" id="Weight" name="Weight" required>
+                    </div>
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Result</button>
+                      <button type="button" class="btn btn-success" onclick="printData()">Print</button>
+                      <button type="reset" class="btn btn-secondary" onclick="resetAlerts()">Reset</button>
+                    </div>
+                </form><!-- End Multi Columns Form -->
+                <br><br>
+
+                {% if prediction %}
+                    <div class="alert alert-danger alert-dismissible fade show col-md-6" role="alert" id="prediction-alert">
+                        <center><h4>{{ prediction }}</h4></center>
+                    </div>
+                    <div class="alert alert-info alert-dismissible fade show" role="alert" id="message-alert">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endif %}
+
+                <!-- Tambahkan JavaScript untuk menghapus alert -->
+                <script>
+                  function resetAlerts() {
+                      const predictionAlert = document.getElementById('prediction-alert');
+                      const messageAlert = document.getElementById('message-alert');
+                      if (predictionAlert) {
+                          predictionAlert.style.display = 'none';
+                      }
+                      if (messageAlert) {
+                          messageAlert.style.display = 'none';
+                      }
+                  }
+              </script>
+
+
+                </div>
+            </div>
+            <!-- End Sales Card -->
+        </div>
+        </div>
+            <!-- Revenue Card -->
+            <!-- End Revenue Card -->
+
+            <!-- Revenue Card -->
+            
+            <!-- End Revenue Card -->
+
+            <!-- Customers Card -->
+            
+            <!-- End Customers Card -->
+
+            <!-- Reports -->
+            <!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+<!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/apexcharts/apexcharts.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/chart.js/chart.umd.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/echarts/echarts.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/quill/quill.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/simple-datatables/simple-datatables.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/tinymce/tinymce.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+
+</body>
+
+</html>

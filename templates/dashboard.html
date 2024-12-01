@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/logo-login.png')}}" rel="icon">
+  <link href="{{ url_for('static', filename='img/logo-login.png')}}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/quill/quill.snow.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/simple-datatables/style.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="{{ url_for('static', filename='img/logo-login.png')}}" alt="">
+        <span class="d-none d-lg-block">Muscle Gym</span>
+      </a>
+
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+
+    </div><!-- End Logo -->
+
+    <!-- End Search Bar -->
+
+    <!-- End Search Icon-->
+
+    <!-- End Notification Icon -->
+
+    <!-- End Messages Dropdown Items -->
+
+    <!-- End Messages Nav -->
+
+    <!-- End Profile Nav -->
+
+    <!-- End Icons Navigation -->
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('dashboard') }}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('hitung_form') }}">
+          <i class="bi bi-speedometer"></i><span>Smart Prediction</span>
+        </a>
+      </li>
+      
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('history') }}">
+          <i class="bi bi-clock-history"></i><span>History</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('anggota') }}">
+          <i class="bi bi-journal-text"></i><span>Anggota</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('tambah_anggota') }}">
+          <i class="bi bi-journal-plus"></i><span>Tambah Anggota</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('logout') }}">
+          <i class="bi bi-box-arrow-left"></i><span>Logout</span>
+        </a>
+      </li>
+      
+      <!-- End Components Nav -->
+
+      <!-- End Forms Nav -->
+
+      <!-- End Tables Nav -->
+
+      <!-- End Charts Nav -->
+
+      <!-- End Icons Nav -->
+
+      
+
+      <!-- End Profile Page Nav -->
+
+      <!-- End F.A.Q Page Nav -->
+
+      <!-- End Contact Page Nav -->
+
+      <!-- End Register Page Nav -->
+
+      <!-- End Login Page Nav -->
+
+      <!-- End Error 404 Page Nav -->
+
+      <!-- End Blank Page Nav -->
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ url_for('dashboard') }}">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-4">
+              <div class="card info-card sales-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Anjuran <span>| Makan</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <img src="{{ url_for('static', filename='img/makan.png')}}" height="70px" width="70px"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>3x Sehari</h6>
+                      <span class="text-success small pt-1 fw-bold">Sesuaikan</span> <span class="text-muted small pt-2 ps-1">kebutuhan</span>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-4">
+              <div class="card info-card revenue-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Anjuran <span>| Minum</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <img src="{{ url_for('static', filename='img/minum.png')}}" height="70px" width="70px"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>Air Mineral</h6>
+                      <span class="text-success small pt-1 fw-bold">Hindari</span> <span class="text-muted small pt-2 ps-1">dehidrasi</span>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Revenue Card -->
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-4">
+
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">Jadwal <span>| Latihan</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <img src="{{ url_for('static', filename='img/latihan.png')}}" height="70px" width="70px"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>Olahraga</h6>
+                      <span class="text-danger small pt-1 fw-bold">Lakukan secara</span> <span class="text-muted small pt-2 ps-1">teratur</span>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div><!-- End Revenue Card -->
+
+            <!-- Customers Card -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Rekomendasi hasil prediksi</h5>
+    
+                  <!-- Bordered Tabs Justified -->
+                  <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+                    <li class="nav-item flex-fill" role="presentation">
+                      <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true">Berat Kurang</button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                      <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Berat Normal</button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                      <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Kelebihan Berat</button>
+                    </li>
+                    <li class="nav-item flex-fill" role="presentation">
+                      <button class="nav-link w-100" id="obesitas-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-obesitas" type="button" role="tab" aria-controls="obesitas" aria-selected="false">Obesitas</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+                    <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
+                      <h6 class="card-title">Sarapan :</h6>
+                      <P><ul>
+                        <li>Oatmeal dengan susu penuh lemak, madu, dan buah-buahan kering seperti kismis atau almond.</li>
+                        <li>Telur orak-arik dengan roti gandum panggang dan alpukat.</li>
+                        <li>Smoothie dari yogurt, buah-buahan, dan selai kacang.</li>
+                      </ul></P>
+                      <h6 class="card-title">Makan Siang :</h6>
+                      <P><ul>
+                        <li>Nasi merah dengan ayam bakar, sayur asam, dan lalapan dengan sambal terasi.</li>
+                        <li>Gado-gado dengan lontong, sayuran rebus, tempe, tahu, dan bumbu kacang.</li>
+                        <li>Nasi goreng dengan irisan daging ayam, telur mata sapi, dan acar.</li>
+                      </ul></P>
+                      <h6 class="card-title">Makan Malam :</h6>
+                      <P><ul>
+                        <li>Ikan bakar dengan sambal dabu-dabu, nasi putih, dan sayur bening bayam.</li>
+                        <li>Sate ayam dengan lontong, bumbu kacang, dan lalapan.</li>
+                        <li>Tumis kangkung dengan udang dan nasi putih.</li>
+                      </ul></P>
+                      <h6 class="card-title">Minum :</h6>
+                      <P><ul>
+                        <li>Smoothie dari susu kedelai, buah naga, dan madu.</li>
+                        <li>Jus jeruk segar tanpa tambahan gula.</li>
+                        <li>Air putih dalam jumlah cukup sepanjang hari.</li>
+                      </ul></P>
+                    </div>
+
+                    <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <h6 class="card-title">Sarapan :</h6>
+                      <P><ul>
+                        <li>Bubur ayam dengan potongan ayam, bawang goreng, seledri, dan kacang kedelai.</li>
+                        <li>Nasi uduk dengan telur dadar, tempe orek, dan sambal.</li>
+                        <li>Smoothie dengan campuran bayam, pisang, susu kedelai, dan air kelapa.</li>
+                      </ul></P>
+                      <h6 class="card-title">Makan Siang :</h6>
+                      <P><ul>
+                        <li>Ayam bakar dengan kentang manis panggang dan sayur asam.</li>
+                        <li>Salad urap dengan sayuran rebus, kelapa parut, dan daging sapi rebus.</li>
+                        <li>Tumis sayuran dengan udang segar dan nasi merah.</li>
+                      </ul></P>
+                      <h6 class="card-title">Makan Malam :</h6>
+                      <P><ul>
+                        <li>Ikan bakar dengan sambal dabu-dabu, quinoa, dan brokoli panggang.</li>
+                        <li>Tahu goreng dengan sayuran tumis dan nasi cokelat.</li>
+                        <li>Sup kacang merah dengan roti gandum panggang dan salad sayuran.</li>
+                      </ul></P>
+                      <h6 class="card-title">Minum :</h6>
+                      <P><ul>
+                        <li>Segelas air putih untuk menghidrasi tubuh setelah tidur.</li>
+                        <li>Pastikan untuk menjaga asupan cairan yang cukup sepanjang hari untuk mendukung kesehatan tubuh.</li>
+                      </ul></P>
+                    </div>
+
+                    <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
+                      <h6 class="card-title">Sarapan :</h6>
+                      <P><ul>
+                        <li>Telur rebus atau dadar dengan sayuran segar seperti bayam dan tomat.</li>
+                        <li>Oatmeal rendah gula dengan potongan buah-buahan seperti pisang atau mangga.</li>
+                      </ul></P>
+                      <h6 class="card-title">Makan Siang :</h6>
+                      <P><ul>
+                        <li>Gado-gado dengan potongan telur rebus, tahu, tempe, sayuran rebus, dan saus kacang rendah kalori.</li>
+                        <li>Pecel dengan sayuran rebus, tahu, tempe, dan bumbu pecel yang tidak terlalu pedas.</li>
+                        <li>Nasi merah dengan ikan bakar, sayuran kukus, dan sambal tomat rendah lemak.</li>
+                      </ul></P>
+                      <h6 class="card-title">Makan Malam :</h6>
+                      <P><ul>
+                        <li>Ayam bakar dengan brokoli panggang dan kentang manis panggang.</li>
+                        <li>Ikan panggang (misalnya, ikan nila atau gurame) dengan asparagus rebus.</li>
+                        <li>Tumis sayuran seperti kangkung atau bayam dengan udang dan nasi cokelat.</li>
+                      </ul></P>
+                      <h6 class="card-title">Minum :</h6>
+                      <P><ul>
+                        <li>Air putih.</li>
+                        <li>Teh herbal tanpa kafein.</li>
+                      </ul></P>
+                    </div>
+
+                    <div class="tab-pane fade" id="bordered-justified-obesitas" role="tabpanel" aria-labelledby="obesitas-tab">
+                      <h6 class="card-title">Sarapan :</h6>
+                      <P><ul>
+                        <li>Telur rebus atau dadar dengan sayuran (bayam, tomat, paprika).</li>
+                        <li>Oatmeal tanpa gula dengan potongan buah-buahan (pisang, apel, atau stroberi).</li>
+                        <li>Smoothie dari bayam, pisang, yogurt rendah lemak, dan susu almond.</li>
+                      </ul></P>
+                      <h6 class="card-title">Makan Siang :</h6>
+                      <P><ul>
+                        <li>Tumis sayuran (brokoli, wortel, kacang panjang) dengan tahu atau tempe, menggunakan sedikit minyak zaitun.</li>
+                        <li>Nasi merah dengan ayam bakar dan sayuran kukus (bayam, wortel, buncis), serta sedikit sambal tomat rendah lemak.</li>
+                      </ul></P>
+                      <h6 class="card-title">Makan Malam :</h6>
+                      <P><ul>
+                        <li>Ikan panggang (ikan nila atau salmon) dengan quinoa atau nasi cokelat, dan brokoli panggang.</li>
+                        <li>Sup sayuran rendah kalori dengan tahu atau daging ayam tanpa kulit.</li>
+                        <li>Tumis kangkung dengan udang kecil dan nasi merah.</li>
+                      </ul></P>
+                      <h6 class="card-title">Minum :</h6>
+                      <P><ul>
+                        <li>Pastikan untuk minum cukup air putih sepanjang hari, setidaknya 8 gelas (2 liter).</li>
+                        <li>Hindari minuman manis, bersoda, dan beralkohol.</li>
+                        <li>Untuk variasi, bisa juga mengonsumsi infused water (air dengan potongan buah-buahan segar seperti lemon, jeruk, mentimun, atau mint) tanpa tambahan gula.</li>
+                      </ul></P>
+                    </div>
+
+                  </div>
+            </div>
+            <!-- End Customers Card -->
+
+            <!-- Reports -->
+            <!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/apexcharts/apexcharts.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/chart.js/chart.umd.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/echarts/echarts.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/quill/quill.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/simple-datatables/simple-datatables.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/tinymce/tinymce.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+
+</body>
+
+</html>
